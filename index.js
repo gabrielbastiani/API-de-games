@@ -73,7 +73,7 @@ var DB = {
 
 app.get("/games",auth,(req, res) => {
     res.statusCode = 200;
-    res.json({user: req.loggedUser,games: DB.games});
+    res.json(DB.games);
 });
 
 app.get("/game/:id",auth,(req, res) => {
@@ -123,7 +123,7 @@ app.delete("/game/:id",(req, res) => {
 
 app.put("/game/:id",(req, res) => {
     if(isNaN(req.params.id)) {
-        res.sendStatus(401);
+        res.sendStatus(400);
     } else {
         var id = parseInt(req.params.id);
         var game = DB.games.find(g => g.id == id);
